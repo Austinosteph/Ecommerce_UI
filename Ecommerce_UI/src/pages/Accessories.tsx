@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 interface item {
 	id: number;
 	image: string;
-	price?: string;
+	price: number;
 	details: string;
 	color: string;
 	icon: JSX.Element;
@@ -13,7 +13,7 @@ export const items: item[] = [
 	{
 		id: 1,
 		image: model2,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#4696AD',
 		icon: <FaRegHeart />,
@@ -21,7 +21,7 @@ export const items: item[] = [
 	{
 		id: 2,
 		image: model4,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#01BEBC',
 		icon: <FaRegHeart />,
@@ -29,7 +29,7 @@ export const items: item[] = [
 	{
 		id: 3,
 		image: model4,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#01BEBC',
 		icon: <FaRegHeart />,
@@ -37,6 +37,7 @@ export const items: item[] = [
 	{
 		id: 4,
 		image: model2,
+		price: 0,
 		details: 'Human hair',
 		color: '#4696AD',
 		icon: <FaRegHeart />,
@@ -44,7 +45,7 @@ export const items: item[] = [
 	{
 		id: 5,
 		image: model2,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#4696AD',
 		icon: <FaRegHeart />,
@@ -52,7 +53,7 @@ export const items: item[] = [
 	{
 		id: 6,
 		image: model4,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#01BEBC',
 		icon: <FaRegHeart />,
@@ -60,6 +61,7 @@ export const items: item[] = [
 	{
 		id: 7,
 		image: model2,
+		price: 0,
 		details: 'Human hair',
 		color: '#4696AD',
 		icon: <FaRegHeart />,
@@ -67,7 +69,7 @@ export const items: item[] = [
 	{
 		id: 8,
 		image: model2,
-		price: '$300,000',
+		price: 300000,
 		details: 'Human hair',
 		color: '#4696AD',
 		icon: <FaRegHeart />,

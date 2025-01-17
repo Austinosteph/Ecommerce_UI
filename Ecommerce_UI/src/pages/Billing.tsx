@@ -1,9 +1,21 @@
 import { useContext } from 'react';
 import { cartContext } from '../App';
+import { FaRegHeart } from 'react-icons/fa';
+import { GrCompare } from 'react-icons/gr';
+import { MdDeleteOutline } from 'react-icons/md';
 
 const Billing = () => {
 	const { state } = useContext(cartContext);
 	console.log(state);
+	const Price = state.reduce(
+		(sum, item) => sum + item.price * item.quantity,
+		0
+	);
+
+	const calc = Price * 0.17;
+	const tax = Math.ceil(calc * 100) / 100;
+
+	const total = Price + tax;
 
 	return (
 		<div className="flex bg-gray-50 pt-10 space-x-7 justify-center">
@@ -125,12 +137,23 @@ const Billing = () => {
 				</div>
 				{state.map((states) => (
 					<div key={states.id}>
-						<div className="grid grid-cols-3 gap-4">
+						<div className="grid grid-cols-3 gap-4 pb-7">
 							<div className="h-24 w-[120px]">
 								<img
 									src={states.image}
 									className="h-full w-full object-contain rounded-2xl"
 								/>
+								<div className="space-y-2">
+									<div className="flex gap-2 items-center">
+										<FaRegHeart /> <span>Wishlist</span>
+									</div>
+									<div className="flex gap-2 items-center">
+										<GrCompare /> <span>Compare</span>
+									</div>
+									<div className="flex gap-2 items-center">
+										<MdDeleteOutline /> <span>Remove</span>
+									</div>
+								</div>
 							</div>
 
 							<div className="space-y-3">
@@ -148,8 +171,11 @@ const Billing = () => {
 										old
 									</p>
 								</div>
+								<p className="font-bold text-green-600 text-2xl">
+									$ {states.price}
+								</p>
 							</div>
-							<div className="pt-16">
+							<div className="pt-32">
 								<select className="outline-none bg-gray-200 w-32 h-11 border border-gray-300 text-gray-900 rounded-2xl focus:border-blue-500 p-2.5">
 									<option value={1}>1 Pc</option>
 									<option value={2}>2 Pcs</option>
@@ -161,17 +187,21 @@ const Billing = () => {
 					</div>
 				))}
 				<div>
-					<div className="justify-between flex m-2">
+					<div className="justify-between flex m-2 pt-5">
 						<p className="font-semibold text-lg">Subtotal</p>
-						<p className="font-semibold text-lg">... usd</p>
+						<p className="font-semibold text-lg">{Price} usd</p>
 					</div>
 					<div className="justify-between flex m-2">
 						<p className="font-semibold text-lg">Tax</p>
-						<p className="font-semibold text-lg">17% ...usd</p>
+						<p className="font-semibold text-lg">17% {tax}usd</p>
 					</div>
 					<div className="justify-between flex m-2">
 						<p className="font-semibold text-lg">Shipping</p>
 						<p className="font-semibold text-lg">0 usd</p>
+					</div>
+					<div className="justify-between flex m-2">
+						<p className="font-semibold text-lg">Total Order</p>
+						<p className="font-semibold text-2xl text-green-600">{total} usd</p>
 					</div>
 				</div>
 			</div>

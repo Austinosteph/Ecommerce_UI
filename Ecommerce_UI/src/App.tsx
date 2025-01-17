@@ -9,7 +9,7 @@ import { createContext, Dispatch, SetStateAction, useState } from 'react';
 interface item {
 	id: number;
 	image: string;
-	price?: string;
+	price: number;
 	quantity: number;
 }
 
