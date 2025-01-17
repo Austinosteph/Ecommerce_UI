@@ -5,22 +5,26 @@ import Accessories from './pages/Accessories';
 import AccessoriesID from './pages/AccessoriesID';
 import Billing from './pages/Billing';
 import { createContext, Dispatch, SetStateAction, useState } from 'react';
-type cartid = {
+
+interface item {
 	id: number;
-	amount: number;
+	image: string;
+	price?: string;
 	quantity: number;
-};
-interface cart {
-	state: cartid[];
-	setState: Dispatch<SetStateAction<cartid[]>>;
 }
 
-export const cartContext = createContext<cart | undefined>(undefined);
+interface cart {
+	state: item[];
+	setState: Dispatch<SetStateAction<item[]>>;
+}
+
+export const cartContext = createContext<cart>({
+	state: [],
+	setState: () => {},
+});
 
 function App() {
-	const [state, setState] = useState<cartid[]>([
-		{ id: 0, quantity: 0, amount: 0 },
-	]);
+	const [state, setState] = useState<item[]>([]);
 
 	return (
 		<cartContext.Provider value={{ state, setState }}>
@@ -33,8 +37,8 @@ function App() {
 							path="accessories/:accessoriesID"
 							element={<AccessoriesID />}
 						/>
-						<Route path="billing" element={<Billing />} />
 					</Route>
+					<Route path="billing" element={<Billing />} />
 				</Routes>
 			</BrowserRouter>
 		</cartContext.Provider>

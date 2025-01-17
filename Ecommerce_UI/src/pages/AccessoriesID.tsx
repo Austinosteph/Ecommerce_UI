@@ -1,10 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { items } from './Accessories';
 import { FaPlus } from 'react-icons/fa6';
+import { useContext } from 'react';
+import { cartContext } from '../App';
 
 const AccessoriesID = () => {
 	const { accessoriesID } = useParams<{ accessoriesID: string }>();
 	const item = items.find((item) => item.id.toString() === accessoriesID);
+	const CartContext = useContext(cartContext);
 
 	return (
 		<div className="flex ml-48 space-x-20 bg-gray-50 pt-10">
@@ -66,6 +69,25 @@ const AccessoriesID = () => {
 					<button
 						type="submit"
 						className="flex items-center bg-black text-white p-2 rounded-lg h-10"
+						onClick={() => {
+							if (CartContext) {
+								// Check if the item with the same id is already in the cart
+								const itemExists = CartContext.state.some(
+									(cartItem: { id: number }) => cartItem.id === item?.id
+								);
+								if (!itemExists && item) {
+									CartContext.setState((prevState) => [
+										...prevState,
+										{
+											id: item.id,
+											image: item.image,
+											price: item.price,
+											quantity: 1,
+										},
+									]);
+								}
+							}
+						}}
 					>
 						<FaPlus />
 						<span className="pl-2">Add to cart</span>

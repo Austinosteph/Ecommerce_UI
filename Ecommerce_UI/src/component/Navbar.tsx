@@ -1,9 +1,13 @@
+import { useContext } from 'react';
 import { CiSearch } from 'react-icons/ci';
 import { IoPersonOutline } from 'react-icons/io5';
 import { PiBasket } from 'react-icons/pi';
 import { NavLink } from 'react-router-dom';
+import { cartContext } from '../App';
 
 const Navbar = () => {
+	const CartContext = useContext(cartContext);
+
 	return (
 		<nav className="flex justify-between px-10 py-5 items-center fixed z-10 left-0 right-0 bg-gray-50">
 			{/* Logo Section */}
@@ -37,6 +41,9 @@ const Navbar = () => {
 					<NavLink to={'/billing'}>
 						<PiBasket />
 					</NavLink>
+					<div className="font-medium text-base text-blue-500">
+						{CartContext?.state.length}
+					</div>
 
 					<div className="text-lg font-bold text-blue-600"></div>
 				</div>
