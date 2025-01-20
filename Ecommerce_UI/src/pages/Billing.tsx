@@ -6,15 +6,12 @@ import { MdDeleteOutline } from 'react-icons/md';
 
 const Billing = () => {
 	const { state } = useContext(cartContext);
-	console.log(state);
 	const Price = state.reduce(
 		(sum, item) => sum + item.price * item.quantity,
 		0
 	);
 
-	const calc = Price * 0.17;
-	const tax = Math.ceil(calc * 100) / 100;
-
+	const tax = Price * 0.17;
 	const total = Price + tax;
 
 	return (
@@ -193,7 +190,7 @@ const Billing = () => {
 					</div>
 					<div className="justify-between flex m-2">
 						<p className="font-semibold text-lg">Tax</p>
-						<p className="font-semibold text-lg">17% {tax}usd</p>
+						<p className="font-semibold text-lg">17% {tax.toFixed(2)}usd</p>
 					</div>
 					<div className="justify-between flex m-2">
 						<p className="font-semibold text-lg">Shipping</p>
@@ -201,7 +198,9 @@ const Billing = () => {
 					</div>
 					<div className="justify-between flex m-2">
 						<p className="font-semibold text-lg">Total Order</p>
-						<p className="font-semibold text-2xl text-green-600">{total} usd</p>
+						<p className="font-semibold text-2xl text-green-600">
+							{total.toFixed(2)} usd
+						</p>
 					</div>
 				</div>
 			</div>
